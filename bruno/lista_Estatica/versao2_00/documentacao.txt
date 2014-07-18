@@ -1,0 +1,78 @@
+## Sistema de campeonato de futebol ##
+
+Autor: Bruno Nogueira de Oliveira, 23 anos, aluno do terceiro período do curso de Sistemas de Informação na Universidade Federal de Goiás.
+
+Algoritmo desenvolvido para disciplina de estrutura de dados, sobre a orientação do Professor Edmundo S. Spotto
+
+== Motivação ==
+
+Visando a aprendizagem do conteúdo de lista estática, foi-me proposto o desenvolvimento de um sistema que implementasse o conteúdo aprendido em sala de aula. O trabalho escolhido foi um sistema de controle de um campeonato de futebol, onde times são inseridos na competição e, de acordo com o resultado dos jogos, uma tabela com o resultado da competição é gerado, organizando os times de acordo com seu desempenho no campeonato.
+
+Um primeiro algorítmo foi desenvolvido. Era a versão 1_00 desse programa. Ele contemplava as principais funções de um campeonato: inserção de times (definindo posição ou selecinando inserção no início ou no final), edição de times (para casos onde o nome do time tenha sido cadastrado incorretamente), exclusão de times e pesquisa de times. Esse algorítmo também possuia uma função que gerava jogos entre os times e, ao inserir o resultado desse jogo, o sistema já calculava a nova configuração da tabela de posições. Mostrando para o usuário, como os times estavam distribuídos na tabela.
+
+Essa versão 2_00, que começa a ser gerada agora, pretende ser um algoritmo que implementara novas funcionalidades, automatizando sistematicamente o anterior e possibilitando uma nova ordem lógica das ações que o usuário do sistema irá possuir ao utilizar esse script. Dentre os desafios propostos para desenvolvimento, pretendemos criar um algorítmo que gera os jogos automaticamente, não precisando o usuário gerá-los manualmente. Outro desafio desse algorítmo sera a persistência dos dados em HD, de forma que o usuário possa retomar as ações em um campeonato facilmente em momentos posteriores da utilização do sistema. 
+
+Também pretendemos gerar a cada nova modificação, correção de bugs ou implementação de novas funcionalidades, arquivos CHANGELOGS de forma que consigamos criar históricos das mudanças e revisões que existam no código.
+
+Outra funcionalidade será a geração de pacotes para organizar o código, tornar o algorítmo mais limpo e seguindo boas práticas de programação.
+
+Com essa introdução pré definida, vamos ao trabalho?
+
+
+== Descrição do produto ==
+
+Esse programa foi desenvolvido em um sistema Ubuntu Linux Versão 12.04 LTS usando a IDE Geany. O script deve ser compilado em sistema semelhante, pois o algorítmo não foi escrito para ser portável para outra plataforma.
+
+Todo arquivo contém duas partes: 
+	Descrissão do arquivo: da um resumo do motivo do arquivo existir e o que contém. Ela tem um espaço chamado lógica algoritmica que é usado apenas quando uma função é complexa demais para ser explicada via comentário.
+	Assinatura: dá informações do arquivo e a propriedade do algorítmo, juntamente com a data de criação e de última modificação.
+
+
+== Engenharia de requisito ==
+
+	@ Escopo do produto:
+	
+	O Sistema de campeonato de futebol, serve para gerar tabelas e organizar sistematicamente jogos em um campeonato de futebol, de forma que o usuário se preocupe minimamente com a organização dos resultados, cabendo ao usuário somente a inserção dos times e o registro dos resultados posteriormente. Ao sistema caberá organizar os times em suas devidas posições na tabela, de acordo com seu desempenho no campeonato.
+	O sistema deverá ser o mais transparente possível ao usuário, porém não poderá deixá-lo, em hipotese alguma interferir diretamente nos resultados, atribuindo pontos, gerando jogos ou interferindo nos resultados. Porém o sistema deve, a qualquer momento que o usuário solicitar, estar pronto para apresentar um relatório completo do desenvolvimento do campeonato.
+	
+	@ Requisitos funcionais:
+	
+	* RF 01: O sistema, ao iniciar, deverá solicitar ao usuário que ele insira e faça a gerência de todos os times que farão parte do campeonato. Nessa primeira fase, o usuário pode fazer a inserção, exclusão, edição e pesquisa de times. Ao usuário cabe apenas a inserção dos times pelo nome, não podendo atribuir pontos ou resultados que beneficiem ou prejudiquem esse time no desenvolvimento do campeonato.
+	
+	* RF 02: Os times do campeonato terão as seguintes caracteristicas: nome, jogos jogados, pontos, vitórias, empates, derrotas, gols feitos, gols levados e saldo de gols. No momento que o sistema solicitar a inclusão do time, deve ser preenchido somente o nome do time.
+	
+	* RF 03: O usuário terá um menu de opções na qual ele poderá:
+		RF 03 - 1 : Cadastrar um time:
+			RF 03 - 1 - a) O time pode ser inserido no final da lista;
+			RF 03 - 1 - b) O time pode ser inserido no meio da lista. Nesse caso o usuário deve digitar o nome do time e a posição que ele irá ser cadastrado;
+			RF 03 - 1 - c) O time pode ser inserido na primeira posição da lista;
+		
+		RF 03 - 2 : Editar o nome de um time previamente cadastrado;
+		RF 03 - 3 : Procurar um time específico no campeonato;
+		RF 03 - 4 : Excluir um time do campeonato;
+		RF 03 - 4 : Visualizar os times já inseridos com seus detalhes;
+		RF 03 - 5 : Finalizar a inserção de times;
+		
+		
+		
+		
+	@ Requisitos não funcionais:
+	
+	* RNF 01: O sistema aceita a inserção de até 50 times em um campeonato. Para modificar esse limite, o desenvolvedor do sistema deverá ser acionado.
+		RNF 01 - 1: A quantidade de times não pode interferir no desempenho do sistema. O sistema deve gerar algorítmos que funcione para uma quantidade ilimitada de times, se esse for o caso.
+	
+	* RNF 02: O sistema contará com um tipo de dado pré definido e personalizado. Esse tipo de dado é 'STRING', um vetor de caracteres que aceitará até CAR elementos.
+	
+	* RNF 03: CAR é uma constante que auxiliará e facilitará a definição de quantos caracteres o vetor 'STRING' irá suportar.
+	
+	* RNF 04: De acordo com o RF 02, o time tem as seguintes características:
+		01- Nome: tipo de dado STRING aceitando até CAR elementos; (tipo de dado descrito no RNF 02 e 03);
+		02 - Jogos: tipo de dado int. Esse valor não deverá, em hipótese alguma ser preenchido ou editado pelo usuário, conforme descrito no RF 01; O valor atribuído nessa variável, deverá ser exatamente igual ao somatório das vitórias, empates e derrotas de um time.
+		03 - Pontos: tipo de dado inteiro. Esse valor não deverá, em hipótese alguma ser preenchido ou editado pelo usuário, conforme descrito no RF 01; O calculo do valor de pontos é: vitórias vezes três, somado a quantidade de empates;
+		04 - Vitórias: tipo de dado int. Esse valor não deverá, em hipótese alguma ser preenchido ou editado pelo usuário, conforme descrito no RF 01; Cada vitória atribuirá ao time mais 3 PONTOS;
+		05 - Empates: tipo de dado int. Esse valor não deverá, em hipótese alguma ser preenchido ou editado pelo usuário, conforme descrito no RF 01;. Cada empate atribuirá ao time mais 1 PONTO;
+		06 - Derrotas: tipo de dado int. Esse valor não deverá, em hipótese alguma ser preenchido ou editado pelo usuário, conforme descrito no RF 01; A derrota não atribui pontos ao time;
+		07 - Gols feitos: tipo de dado int. Esse valor não deverá, em hipótese alguma ser preenchido ou editado pelo usuário, conforme descrito no RF 01; Esse valor só é modificado quando um jogo ocorre. O valor que deve ser somado a esse total é o valor de gols atribuidos ao time no momento em que o resultado final do jogo é registrado no sistema.
+		08 - Gols levados: tipo de dado int. Esse valor não deverá, em hipótese alguma ser preenchido ou editado pelo usuário, conforme descrito no RF 01; Esse valor só é modificado quando um jogo ocorre. O valor que deve ser somado a esse total é o valor de gols atribuidos ao time adversário no momento que o resultado final do jogo é registrado no sistema.
+		09 - Saldo de gols: tipo de dado int. Esse valor não deverá, em hipótese alguma ser preenchido ou editado pelo usuário, conforme descrito no RF 01; O valor dessa variável é a diferença entre os gols feitos pelo time pelos gols levados, resultando em um saldo final de gols.
+	

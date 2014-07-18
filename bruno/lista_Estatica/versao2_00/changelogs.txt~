@@ -1,0 +1,8 @@
+Dia 07.10.2013
+
+*Inserido Estrutura "T_listaDeTimes" no arquivo struct.h;
+*Inserido Estrutura "T_gerarjogos" no arquivo struct.h;
+*Inserido função "criarListaEncadeadaVazia" no arquivo sistema.h;
+*Melhorado a interação do usuário com o sistema no arquivo principal.c, inserindo validação se a lista está vazia ao final da inserção dos times. O usuário agora tem a possibilidade de retornar a inserção dos times. Caso a lista estiver vazia e o usuário não quiser retornar à inserção dos times, o programa é fechado;
+*Inserido função "criarListasDeTimes" no arquivo sistema.h;
+

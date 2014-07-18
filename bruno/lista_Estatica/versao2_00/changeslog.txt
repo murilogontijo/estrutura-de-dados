@@ -1,0 +1,5 @@
+CHANGE LOG
+
+Pacote fechado entregue dia 23.10.2013;
+
+25.10.2013: Excluido função inserirTimeFinal(). Adaptado as funcionalidades que a usavam para usarem a função inserirTime();

@@ -1,0 +1,40 @@
+## Fila de Banco ##
+
+Autor: Bruno Nogueira de Oliveira, 23 anos, aluno do terceiro período do curso de Sistemas de Informação na Universidade Federal de Goiás.
+
+Algoritmo desenvolvido para disciplina de estrutura de dados, sobre a orientação do Professor Edmundo S. Spotto
+
+Visando a aprendizagem do conteúdo de pilha e fila estática, foi-me proposto o desenvolvimento de um sistema que implementasse o conteúdo aprendido em sala de aula. O sistema escolhido foi uma fila de banco, onde, no decorrer das atividades bancárias, usuários chegam, são atendidos e saem.	Os clientes, ao chegar recebem senhas e são atendidos conforme as senhas são chamadas. Para simplificar o sistema existe apenas uma ordem de prioridade, que são pessoas da terceira idade, ou seja, maior que 60 anos, que devem serem atendidas preferencialmente.
+
+== Engenharia de requisito ==
+
+	@ Escopo do produto:
+	
+	O sistema basicamente trabalha com duas operações:
+		* Receber cliente na fila;
+		* Atender cliente;
+		* A fila tem um tamanho máximo de elementos que podem ficar na fila que é definido através da MACRO MAX no arquivo constantes.h na pasta SRC.
+	
+	O cliente, ao chegar no Banco é atendido por um recepcionista que coleta o nome e a idade da pessoa. O sistema então atribui uma senha para esse cliente que deve aguardar na fila sua vez de ser atendido. A senha é gerada sequencialmente, começando do zero e indo até o máximo valor máximo atribuido para um inteiro na linguagem C.
+	Por ser uma fila, o novo cliente sempre entra na última posição para aguardar atendimento. O elemento que é atendido é o primeiro, seguindo o esquema FIFO (first in, first out).
+	
+	Nesse esquema existe uma excessão. Clientes com idade igual ou superior à 60 anos tem tratamento especial, sendo priorizado no atendimento. Isso quer dizer que, independente da posição da fila que ele esteja, se o sistema detectar que há um cliente preferencial na fila, ele deverá ser atendido no próximo atendimento.
+	
+	Para fazer essa regra de atendimento valer, implementamos o conceito de empilhamento que funciona da seguinte maneira:
+		O sistema, ao detectar que existe um cliente preferencial na fila, inicia um empilhador que empilhará os elementos iniciais da fila até encontrar o elemento preferencial para atendê-lo. O diagrama desse caso é explicado no arquivo Fila_de_Banco.asta que encontra-se na pasta resources desse pacote, no caso de uso atender cliente.
+		O algorítmo é o seguinte:
+		
+			1 - É chamado a função atender cliente;
+			2 - Sistema valida se existe algum elemento preferencial na fila. Isso é feito atraves de uma estrutura contadora chamada T_preferencia;
+			3 - Existindo um elemento preferencial, o sistema inicia uma pilha estática;
+			4 - Sistema pega o primeiro elemento da fila;
+			5 - Valida se o elemento da fila atende a condição de preferencia;
+			6 - Caso positivo vai para o passo 9; 
+			7 - Caso negativo o sistema pega esse elemento e coloca na pilha;
+			8 - Sistema aponta para a próxima posição vazia da pilha;
+			9 - Sistema aponta para o próximo elemento da fila e volta para o passo 5;
+			10 - Sistema atende esse cliente;
+			11 - Feito o atendimento, o sistema diminui a variável contadora do T_preferencial;
+			12 - Sistema decrementa a quantidade de pessoas aguardando atendimento;
+			13 - Sistema decrementa o valor de topo da pilha para ela não apontar para a próxima posição vazia e sim para a última posição ocupada na pilha;
+			14 - Enquanto ouver elementos na pilha o sistema vai colocando ela na posição primária de atendimento e decrementando essa posição, até retornar todos os elementos da pilha para a fila.

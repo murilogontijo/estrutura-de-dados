@@ -1,0 +1,7 @@
+Sistema de teatro:
+
+O sistema  comporta vários eventos. 
+Em cada evento deverá haver uma estrutura de dados que comportem o público do teatro.
+O teatro tem 28 fileiras divididas em dois blocos, cada bloco contendo 43 fileiras de cadeira.
+
+O teatro tem um corredor central e dois corredores laterais. Caso o espetáculo lote, serão disponibilizados uma fileira extra de cadeiras nos corredores laterais, e duas fileiras de cadeiras nos corredores centrais.
